@@ -6,6 +6,8 @@ from torch.utils.data import DataLoader
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint
 
+from object_detection_helper import DetectionLitModule
+
 def collate_fn(batch):
     samples = [item[0] for item in batch]
     samples = torch.stack(samples, 0)

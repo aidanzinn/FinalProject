@@ -10,9 +10,9 @@ import pytorch_lightning as pl
 
 import spikingjelly
 
-from models.detection_backbone import DetectionBackbone # CRITICAL TRAINING CODE - NEED TO IMPLEMENT
+from models.detection_backbone import DetectionBackbone # NN Backbone (feature extractor)
 from models.SSD_utils import GridSizeDefaultBoxGenerator, SSDHead, filter_boxes # NEED TO IMPLEMENT
-from prophesee_utils.metrics.coco_utils import coco_eval # CAN SKIP?
+# from prophesee_utils.metrics.coco_utils import coco_eval # CAN SKIP?
 
 class DetectionLitModule(pl.LightningModule):
     def __init__(self, args): # Initializer 
