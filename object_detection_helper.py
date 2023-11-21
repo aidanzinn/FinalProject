@@ -132,8 +132,8 @@ class DetectionLitModule(pl.LightningModule):
                 'val_AR_det=1', 'val_AR_det=10', 'val_AR_det=100',
                 'val_AR_small', 'val_AR_medium', 'val_AR_large',
             ]
-            stats_dict = {k:v for k,v in zip(keys, stats)}
-            self.log_dict(stats_dict)
+            # stats_dict = {k:v for k,v in zip(keys, stats)}
+            # self.log_dict(stats_dict)
         
     def on_train_epoch_end(self):
         self.on_mode_epoch_end(mode="train")

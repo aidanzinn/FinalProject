@@ -24,30 +24,30 @@ def main():
         num_classes = 2
 
         # Data
-        batch_size = 64
+        b = 64 # batch size
         sample_size = 100000
-        time_steps = 5
-        time_bins = 2
+        T = 5 # Simulating time steps
+        tbin = 2 # number of micro time bins
         image_shape = (240, 304)
 
         # Training
         epochs = 50
-        learning_rate = 1e-3
-        weight_decay = 1e-4
-        num_workers = 4
+        lr = 1e-3 # learning rate
+        wd = 1e-4 # weight decay
+        num_workers = 4 # num of workers for dataloaders
         train = True  # Assuming default behavior is to train
         test = False  # Assuming default behavior is not to test
         device = 0
         precision = 16
-        save_checkpoints = False  # Assuming default behavior is not to save checkpoints
+        save_ckpt = False  # Assuming default behavior is not to save checkpoints
         comet_api = None  # Assuming no Comet API key by default
 
         # Backbone
-        backbone = 'vgg-11'
+        backbone = 'vgg-11' # NEED TO CHANGE TO CORRECT DENSENET
         use_batch_norm = True  # Assuming default behavior is to use BatchNorm2d
         pretrained_backbone = None
-        pretrained_model = None
-        extra_layers_channels = [640, 320, 320]
+        pretrained = None
+        extras = [640, 320, 320]
 
         # Priors
         min_ratio = 0.05
@@ -57,8 +57,8 @@ def main():
         # Loss parameters
         box_coder_weights = [10.0, 10.0, 5.0, 5.0]
         iou_threshold = 0.50
-        score_threshold = 0.01
-        nms_threshold = 0.45
+        score_thresh = 0.01
+        nms_thresh = 0.45
         topk_candidates = 200
         detections_per_image = 100
 
@@ -70,7 +70,7 @@ def main():
     else:
         sys.exit(f"{args.dataset} is not a supported dataset.")
 
-    module = DetectionLitModule(args) # THIS IS WHERE IT LINKS TO THE HELPER FILE - NEED TO IMPLEMENT
+    module = DetectionLitModule(args) # THIS IS WHERE IT LINKS TO THE HELPER FILE
     
     # MIGHT NEED TO SET UP CHECKPOINTS HERE
 
