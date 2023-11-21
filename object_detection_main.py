@@ -7,6 +7,7 @@ import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint
 
 from object_detection_helper import DetectionLitModule
+from datasets.gen4_od_dataset import GEN1DetectionDataset
 
 def collate_fn(batch):
     samples = [item[0] for item in batch]
@@ -65,7 +66,7 @@ def main():
     args = Config()
 
     if args.dataset == "gen1":
-        dataset = 1 #GEN1DetectionDataset # NEED TO REPLACE WITH GEN4 DATASET
+        dataset = GEN1DetectionDataset #GEN1DetectionDataset # NEED TO REPLACE WITH GEN4 DATASET
     else:
         sys.exit(f"{args.dataset} is not a supported dataset.")
 

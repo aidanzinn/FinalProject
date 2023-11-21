@@ -1,7 +1,7 @@
 import torch.nn as nn
 
-from spikingjelly.clock_driven import neuron
-from .spiking_densenet import * # NEED TO ADD
+from spikingjelly.clock_driven import layer, neuron, surrogate
+from models.spiking_densenet import * # NEED TO ADD
 
 class SpikingBlock(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, 
@@ -27,20 +27,20 @@ class SpikingBlock(nn.Module):
         return out
     
 
-    # DOUBLE CHECK THIS
-    def get_model(args):
-        norm_layer = nn.BatchNorm2d if args.bn else None
-        ms_neuron = neuron.MultiStepParametricLIFNode
+# DOUBLE CHECK THIS
+def get_model(args):
+    norm_layer = nn.BatchNorm2d if args.bn else None
+    ms_neuron = neuron.MultiStepParametricLIFNode
 
-        family, version = args.model.split('-')
-        if family == "densenet":
-            depth, growth_rate = version.split('_')
-            blocks = {"121": [6,12,24,16], "169": [6,12,32,32]}
-            return multi_step_spiking_densenet_custom(
-                2*args.tbin, norm_layer=norm_layer,
-                multi_step_neuron=ms_neuron,
-                growth_rate=int(growth_rate), block_config=blocks[depth],
-                num_classes=2, backend="cupy",
-            )
-        else:
-            raise ValueError(f"Unsupported model family: {family}")
+    family, version = args.model.split('-')
+    if family == "densenet":
+        depth, growth_rate = version.split('_')
+        blocks = {"121": [6,12,24,16], "169": [6,12,32,32]}
+        return multi_step_spiking_densenet_custom(
+            2*args.tbin, norm_layer=norm_layer,
+            multi_step_neuron=ms_neuron,
+            growth_rate=int(growth_rate), block_config=blocks[depth],
+            num_classes=2, backend="cupy",
+        )
+    else:
+        raise ValueError(f"Unsupported model family: {family}")

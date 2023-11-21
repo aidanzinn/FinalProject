@@ -20,6 +20,7 @@ class DetectionLitModule(pl.LightningModule):
         self.save_hyperparameters() # saves all the provided hyperparameters (args in this case) internally within the model.
         self.args = args
         self.lr = args.lr
+
         self.backbone = DetectionBackbone(args)
         self.anchor_generator = GridSizeDefaultBoxGenerator(
             args.aspect_ratios, args.min_ratio, args.max_ratio)
@@ -118,11 +119,12 @@ class DetectionLitModule(pl.LightningModule):
                 return
             
             h, w = self.args.image_shape
-            stats = coco_eval(
-                targets, 
-                detections, 
-                height=h, width=w, 
-                labelmap=("car", "pedestrian"))
+            # I THINK WE DONT NEED BECAUSE JUST EVALUATION?
+            # stats = coco_eval(
+            #     targets, 
+            #     detections, 
+            #     height=h, width=w, 
+            #     labelmap=("car", "pedestrian"))
 
             keys = [
                 'val_AP_IoU=.5:.05:.95', 'val_AP_IoU=.5', 'val_AP_IoU=.75', 
