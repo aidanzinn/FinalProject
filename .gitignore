@@ -1,0 +1,3 @@
+__pycache__/
+# Exclude training data directory
+train_a/
