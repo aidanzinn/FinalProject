@@ -43,8 +43,8 @@ def main():
         comet_api = None  # Assuming no Comet API key by default
 
         # Backbone
-        backbone = 'vgg-11' # NEED TO CHANGE TO CORRECT DENSENET
-        use_batch_norm = True  # Assuming default behavior is to use BatchNorm2d
+        model = 'densenet-121_32' # Used in utils.py to select model, can probably simplify      # densenet = family    121 = version    32 = growth rate
+        bn = True  # Assuming default behavior is to use BatchNorm2d
         pretrained_backbone = None
         pretrained = None
         extras = [640, 320, 320]

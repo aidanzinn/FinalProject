@@ -1,7 +1,7 @@
 import torch.nn as nn
 
 from spikingjelly.clock_driven import layer, neuron, surrogate
-from models.spiking_densenet import * # NEED TO ADD
+from models.spiking_densenet import * 
 
 class SpikingBlock(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, 
